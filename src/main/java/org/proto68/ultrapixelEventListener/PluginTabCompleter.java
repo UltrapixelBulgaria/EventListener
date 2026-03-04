@@ -1,8 +1,11 @@
 package org.proto68.ultrapixelEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.protection.managers.RegionManager;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -17,7 +20,7 @@ public class PluginTabCompleter implements TabCompleter {
     }
 
     public List<String> onTabComplete(@NonNull CommandSender sender, @NonNull Command command, @NonNull String alias, String @NonNull [] args) {
-        if (!(sender instanceof Player)) {
+        if (!(sender instanceof Player player)) {
             sender.sendMessage("Only players can use this command.");
             return null;
         } else {
@@ -37,10 +40,22 @@ public class PluginTabCompleter implements TabCompleter {
                     }
                 } else if (args.length == 2 && args[0].equalsIgnoreCase("addRegion")) {
                     if (sender.hasPermission("events.add")) {
-                        suggestions.add("<regionName>");
+                        RegionManager regionManager = WorldGuard.getInstance()
+                                .getPlatform()
+                                .getRegionContainer()
+                                .get(BukkitAdapter.adapt(player.getWorld()));
+
+                        if (regionManager == null) {
+                            return suggestions;
+                        }
+
+                        Map<String, ProtectedRegion> regions = regionManager.getRegions();
+
+                        suggestions.addAll(regions.keySet());
                     }
                 } else if (args.length == 2 && args[0].equalsIgnoreCase("erase")) {
                     if (sender.hasPermission("events.erase")) {
+                        suggestions.add("all");
                         suggestions.addAll(Objects.requireNonNull(this.plugin.getTempConfig().getConfigurationSection("players")).getKeys(false));
                     }
                 } else if (args.length == 3 && args[0].equalsIgnoreCase("addRegion") && sender.hasPermission("events.add")) {
@@ -54,12 +69,14 @@ public class PluginTabCompleter implements TabCompleter {
                     if (sender.hasPermission("events.result")) {
                         try {
                         suggestions.addAll(Objects.requireNonNull(this.plugin.getDataConfig().getConfigurationSection("regions")).getKeys(false));
-                        } catch (Exception ingored){
+                        } catch (Exception ignored){
                             sender.sendMessage("Error! Empty regions!");
                         }
                     }
                 } else if (args.length == 2 && sender.hasPermission("events.result")) {
-                    suggestions.add("[count]");
+                    suggestions.add("3");
+                    suggestions.add("5");
+                    suggestions.add("10");
                 }
             }
 
