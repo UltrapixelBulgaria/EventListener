@@ -1,12 +1,13 @@
 package org.proto68.ultrapixelEventListener;
 
-import java.io.IOException;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NonNull;
+
+import java.io.IOException;
 
 public class EraseCommand implements CommandExecutor {
     private final EventListener plugin;
@@ -21,7 +22,7 @@ public class EraseCommand implements CommandExecutor {
         } else {
 
             if (args.length != 2){
-                sender.sendMessage(ChatColor.GOLD + "Usage: /events erase <regioName/all>");
+                sender.sendMessage(ChatColor.GOLD + "Usage: /events erase <regionName/all>");
             }
 
             String eventName = args[1];
@@ -29,8 +30,7 @@ public class EraseCommand implements CommandExecutor {
             if (this.plugin.getTempConfig().contains(path)) {
                 this.plugin.getTempConfig().set(path, null);
                 this.plugin.saveDataFile();
-                String var10001 = String.valueOf(ChatColor.GREEN);
-                sender.sendMessage(var10001 + "Players for region " + eventName + " were deleted successfully!");
+                sender.sendMessage(ChatColor.GREEN + "Players for region " + eventName + " were deleted successfully!");
             } else if (args[1].equalsIgnoreCase("all")) {
                 try {
                     this.plugin.eraseTempFile();
@@ -39,8 +39,7 @@ public class EraseCommand implements CommandExecutor {
                     throw new RuntimeException(e);
                 }
             } else {
-                String var9 = String.valueOf(ChatColor.RED);
-                sender.sendMessage(var9 + "Can't find region " + eventName);
+                sender.sendMessage(ChatColor.RED + "Can't find region " + eventName);
             }
 
         }
