@@ -1,0 +1,36 @@
+name: UltrapixelEventListener
+version: '1.0'
+main: org.proto68.ultrapixelEventListener.EventListener
+api-version: '1.21'
+prefix: EventListener
+authors: [ Proto68 ]
+description: Listens for top players entering a region
+depend:
+  - WorldGuard
+
+commands:
+  events:
+    description: Main command for the plugin
+    usage: /events <subcommands>
+
+  result:
+    description: Gives the results for a region
+    usage: /result <region> [count]
+
+permissions:
+  events.add:
+    description: Adds a region to the EventListener
+    default: op
+
+  events.reload:
+    description: Reloads the plugin
+    default: op
+
+  events.erase:
+    description: Erases the temp.yml file
+    default: op
+
+  events.result:
+    description: Displays the results
+    default: op
+
