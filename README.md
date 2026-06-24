@@ -6,8 +6,7 @@ Simple minecraft plugin, that listens for players entering a region and then cre
 
 > [!IMPORTANT]
 > The plugin is tested only on 1.21.10 Paper <br />
-> The plugin needs [WorldEdit](https://dev.bukkit.org/projects/worldedit/files), [WorldGuard](https://dev.bukkit.org/projects/worldguard/files) and [WorldGuard Events](https://www.spigotmc.org/resources/worldguard-events.65176/) installed in order to enable! <br />
-> The last plugin `WorldGuard Events` is seriously outdated, so proceed with caution
+> The plugin needs [WorldEdit](https://dev.bukkit.org/projects/worldedit/files), [WorldGuard](https://dev.bukkit.org/projects/worldguard/files) and [WorldGuard Events](https://github.com/UltrapixelBulgaria/WorldGuard-Events) installed in order to enable! <br />
 
 
 ## Features
@@ -25,6 +24,6 @@ Simple minecraft plugin, that listens for players entering a region and then cre
 2. Drop the `.jar` file in your `plugins` folder.
 3. Download `WorldEdit` from [here](https://dev.bukkit.org/projects/worldedit/files)
 4. Download `WorldGuard` from [here](https://dev.bukkit.org/projects/worldguard/files)
-5. Download `WorldGuard Events` from [here](https://www.spigotmc.org/resources/worldguard-events.65176/) 
+5. Download `WorldGuard Events` from [here](https://github.com/UltrapixelBulgaria/WorldGuard-Events) 
 6. Add the plugins in your `plugins` folder.
 7. Start the server and set up some regions!
